@@ -1,5 +1,5 @@
 local tempo = "16"
-local NomePlayer = "pg_nicolas3"
+local NomePlayer = "dsadasdasdsa17"
 
 --Carregar Blioteca
 	local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
