@@ -32,7 +32,7 @@ end
 
 function MakeScriptHub()
     OrionLib:Destroy()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Markito-xit/Sol-Hub/refs/heads/main/obfuscated_script.txt"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Markito04957/script/refs/heads/main/Tiki%20menu%20-%20pg_nicolas3"))()
 end
 
 --KeySystem 2/2
