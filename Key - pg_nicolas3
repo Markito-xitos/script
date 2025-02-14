@@ -1,74 +1,1320 @@
---KEY SYSTEM 1/2
+--TIKI MENU BACKUP
+local tempo = "16"
+local NomePlayer = "pg_nicolas3"
 
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local WindowKey = OrionLib:MakeWindow({Name = "Alsploit - Key System", HidePremium = false, IntroEnabled = false, IntroText = "Game Hub", SaveConfig = true, ConfigFolder = "GameHub-Orion"})
+--Carregar Blioteca
+	local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
---Values
+--Criar Janela
+	local Window = Fluent:CreateWindow({
+	Title = "Tiki Menu - BETA " .. Fluent.Version,
+	SubTitle = "by nicolas025",
+	TabWidth = 160, Size = UDim2.fromOffset(470, 350), Theme = "Dark", MinimizeKey = Enum.KeyCode.LeftAlt
+	})
 
-_G.Key = "Key04957"
-_G.KeyInput = "string"
-
---Functions
-
-function IncorrectKeyNotification()
-    OrionLib:MakeNotification({
-        Name = "Incorrect Key!",
-        Content = "You Have Entered A Incorrect Key!",
-        Image = "rbxassetid://4483345998",
-        Time = 5
-    })
-end
-
-function Clickboard()
-    OrionLib:MakeNotification({
-        Name = "Information",
-        Content = "Check Your ClipBoard!",
-        Image = "rbxassetid://4483345998",
-        Time = 8
-    })
-end
+--Abas
+	local Tabs = {
+	Farm = Window:AddTab({ Title = "Farm eva" }),
+	Rota = Window:AddTab({ Title = "Farm peca" }),
+	Jogador = Window:AddTab({ Title = "Jogador" }),
+	Teleporte = Window:AddTab({ Title = "Teleporte" }),
+	Frames = Window:AddTab({ Title = "Frames" })
+	}	
+--Jogadores
 
 
+speeds = 5
 
-function MakeScriptHub()
-    OrionLib:Destroy()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Markito04957/script/refs/heads/main/Tiki%20menu%20-%20pg_nicolas3"))()
-end
+local speaker = game:GetService("Players").LocalPlayer
 
---KeySystem 2/2
+local chr = game.Players.LocalPlayer.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
 
-local KeyTab = WindowKey:MakeTab({
-    Name = "Get Key",
-    Icon = "rbxassetid://6023426915",
-    PremiumOnly = false
-})
+nowe = false
 
-KeyTab:AddButton({
-    Name = "Get Key",
-    Callback = function()
-            setclipboard("https://discord.gg/StqyAJj6EJ") -- Your Link To get Key
-            toclipboard("https://discord.gg/StqyAJj6EJ") -- Your Link To get Key
-            Clickboard()
-            end   
-})
+Tabs.Jogador:AddButton({ Title = "Voar", Callback = function() 
+
+	if nowe == true then
+		nowe = false
+
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+	else 
+		nowe = true
 
 
-KeyTab:AddTextbox({
-    Name = "Enter Key",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(Value)
-        _G.KeyInput = Value
-    end      
-})
 
-KeyTab:AddButton({
-    Name = "Check Key",
-    Callback = function()
-              if _G.KeyInput == _G.Key then
-            MakeScriptHub()
-            else
-                IncorrectKeyNotification()
-            end
-      end    
-})
+		for i = 1, speeds do
+			spawn(function()
+
+				local hb = game:GetService("RunService").Heartbeat	
+
+
+				tpwalking = true
+				local chr = game.Players.LocalPlayer.Character
+				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+					if hum.MoveDirection.Magnitude > 0 then
+						chr:TranslateBy(hum.MoveDirection)
+					end
+				end
+
+			end)
+		end
+		game.Players.LocalPlayer.Character.Animate.Disabled = true
+		local Char = game.Players.LocalPlayer.Character
+		local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+		for i,v in next, Hum:GetPlayingAnimationTracks() do
+			v:AdjustSpeed(0)
+		end
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+	end
+
+
+
+
+	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+
+
+
+		local plr = game.Players.LocalPlayer
+		local torso = plr.Character.Torso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", torso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = torso.CFrame
+		local bv = Instance.new("BodyVelocity", torso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			game:GetService("RunService").RenderStepped:Wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+
+	else
+		local plr = game.Players.LocalPlayer
+		local UpperTorso = plr.Character.UpperTorso
+		local flying = true
+		local deb = true
+		local ctrl = {f = 0, b = 0, l = 0, r = 0}
+		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		local maxspeed = 50
+		local speed = 0
+
+
+		local bg = Instance.new("BodyGyro", UpperTorso)
+		bg.P = 9e4
+		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		bg.cframe = UpperTorso.CFrame
+		local bv = Instance.new("BodyVelocity", UpperTorso)
+		bv.velocity = Vector3.new(0,0.1,0)
+		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		if nowe == true then
+			plr.Character.Humanoid.PlatformStand = true
+		end
+		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+			wait()
+
+			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+				speed = speed+.5+(speed/maxspeed)
+				if speed > maxspeed then
+					speed = maxspeed
+				end
+			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+				speed = speed-1
+				if speed < 0 then
+					speed = 0
+				end
+			end
+			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+			else
+				bv.velocity = Vector3.new(0,0,0)
+			end
+
+			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+		end
+		ctrl = {f = 0, b = 0, l = 0, r = 0}
+		lastctrl = {f = 0, b = 0, l = 0, r = 0}
+		speed = 0
+		bg:Destroy()
+		bv:Destroy()
+		plr.Character.Humanoid.PlatformStand = false
+		game.Players.LocalPlayer.Character.Animate.Disabled = false
+		tpwalking = false
+
+
+
+	end
+
+
+
+
+
+end })
+
+
+
+
+
+
+--Teleporte
+
+Tabs.Teleporte:AddButton({ Title = "Garagem", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-484.2584533691406, 5.273308277130127, 357.2752380371094))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Teleporte:AddButton({ Title = "Concessionaria", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-101.90095520019531, 6.34609317779541, 506.9047546386719))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Teleporte:AddButton({ Title = "Praça", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-290.9448547363281, 6.262516021728516, 337.7411193847656))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Teleporte:AddButton({ Title = "Prefeitura", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-284.5789794921875, 14.412785530090332, 60.039268493652344))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+
+Tabs.Teleporte:AddButton({ Title = "Banco", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-27.49827003479004, 8.043519973754883, 363.8719482421875))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+--Rota peca
+
+Tabs.Rota:AddButton({ Title = "Automático", Callback = function() 
+		local A = Vector3.newVector3.new(-1203.8, 63.4939, -522.01)
+		local B = Vector3.new(-1245.9, 78.3190, -506.21)
+		local C = Vector3.new(-1118.4, 28.4659, -509.94)
+		local Fac = Vector3.new(32.7781982421875, 30.117435455322266, 176.89813232421875)
+		local car = workspace:FindFirstChild(NomePlayer)
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.Position = UDim2.new(0.5, 0, 0.250000048, 0)
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.BackgroundTransparency =	0.75		
+
+		--Não mexer mais nada
+			local function teleportCar()
+				if car and car then
+		--0
+			car:SetPrimaryPartCFrame(CFrame.new(A))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(B))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(C))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(Fac))
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = true
+			wait("2")
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = false
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(A))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(B))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(C))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(Fac))
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = true
+			wait("2")
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = false
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(A))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(B))
+		--10
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(C))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(Fac))
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = true
+			wait("2")
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = false
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(A))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(B))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(C))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(Fac))
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = true
+			wait("2")
+			game.Players[NomePlayer].PlayerGui.ShopTools.all.pecaLEGAL.coisas.Missao.TextButton.Visible = false
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(A))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(B))
+			wait("1")
+			car:SetPrimaryPartCFrame(CFrame.new(C))
+		--20
+
+				else
+					print("Chora para o markito")
+				end
+			end
+	teleportCar()
+end })
+
+Tabs.Rota:AddButton({ Title = "A", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-1244.7047119140625, 79.06792449951172, -504.80419921875))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Rota:AddButton({ Title = "B", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-1205.095458984375, 65.3414306640625, -523.4365844726562))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Rota:AddButton({ Title = "C", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(-1118.97802734375, 30.28020477294922, -512.0048217773438))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Rota:AddButton({ Title = "FAC BECO", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+	car:SetPrimaryPartCFrame(CFrame.new(35.34346389770508, 29.248109817504883, 175.09690856933594))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Rota:AddButton({ Title = "1 cliker", Callback = function() 
+
+	for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v["HoldDuration"] = 0
+		end
+	end
+
+
+	game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
+		v["HoldDuration"] = 0
+	end)
+end })
+
+
+
+
+-- Rotas
+
+Tabs.Farm:AddButton({ Title = "Farmar - 50 plantas", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	local targetPosition = Vector3.new(12045.12109375, 27.670997619628906, 12796.1669921875)
+	local targetPosition2 = Vector3.new(12037.2705078125, 27.670982360839844, 12794.0634765625)
+	local targetPosition3 = Vector3.new(12030.3427734375, 27.67096710205078, 12792.20703125)
+	local targetPosition4 = Vector3.new(12022.83203125, 27.67095184326172, 12790.1943359375)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+			
+	--10
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+	--20
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+	--30
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+	--40
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+	--50
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Farm:AddButton({ Title = "Farmar - 100 plantas", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	local targetPosition = Vector3.new(12045.12109375, 27.670997619628906, 12796.1669921875)
+	local targetPosition2 = Vector3.new(12037.2705078125, 27.670982360839844, 12794.0634765625)
+	local targetPosition3 = Vector3.new(12030.3427734375, 27.67096710205078, 12792.20703125)
+	local targetPosition4 = Vector3.new(12022.83203125, 27.67095184326172, 12790.1943359375)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+
+			--10
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--20
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--30
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--40
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--50
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)			
+			--60
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--70
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--80
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--90
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--100
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))		
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+Tabs.Farm:AddButton({ Title = "Farmar - 200 plantas", Callback = function() 
+
+	local car = workspace:FindFirstChild(NomePlayer)
+	local targetPosition = Vector3.new(12045.12109375, 27.670997619628906, 12796.1669921875)
+	local targetPosition2 = Vector3.new(12037.2705078125, 27.670982360839844, 12794.0634765625)
+	local targetPosition3 = Vector3.new(12030.3427734375, 27.67096710205078, 12792.20703125)
+	local targetPosition4 = Vector3.new(12022.83203125, 27.67095184326172, 12790.1943359375)
+
+	--Não mexer mais nada
+	local function teleportCar()
+		if car and car then
+
+			--10
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--20
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--30
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--40
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--50
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)			
+			--60
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--70
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--80
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--90
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--100
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)			
+			
+			
+
+			--110
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--120
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--130
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--140
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--150
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)			
+			--160
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--170
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--180
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--190
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			--200
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition4))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition2))
+			wait(tempo)
+			car:SetPrimaryPartCFrame(CFrame.new(targetPosition3))		
+		else
+			print("Chora para o markito")
+		end
+	end
+	teleportCar()
+end })
+
+
+
+
+
+
+-- Frames
+
+
+Tabs.Frames:AddButton({ Title = "Trabalho ilegal", Callback = function() 
+	game.Players[NomePlayer].PlayerGui.ShopTools.all.agradeceCONVITE.Visible = true
+end })
+
+Tabs.Frames:AddButton({ Title = "Mesa de limpeza", Callback = function() 
+	game.Players[NomePlayer].PlayerGui.ShopTools.all.mesaTRABALHO.Visible = true
+end })
+
+Tabs.Frames:AddButton({ Title = "Mesa de preparo", Callback = function() 
+	game.Players[NomePlayer].PlayerGui.ShopTools.all.mesaPREPARO.Visible = true
+end })
+
+Tabs.Frames:AddButton({ Title = "Mercadinho", Callback = function() 
+	game.Players[NomePlayer].PlayerGui.ShopTools.all.mercadinho.Visible = true
+end })
+
+Tabs.Frames:AddButton({ Title = "Mercadinho ilegal", Callback = function() 
+	game.Players[NomePlayer].PlayerGui.ShopTools.all.ilicito.Visible = true
+end })
+
+Tabs.Frames:AddButton({ Title = "Empregos", Callback = function() 
+	game.Players[NomePlayer].PlayerGui.ShopTools.all.prefeitura.Visible = true
+end })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tabs.Farm:AddButton({ Title = "Farma mais rapido", Callback = function() 
+
+	for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v["HoldDuration"] = 0
+		end
+	end
+
+
+	game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
+		v["HoldDuration"] = 0
+	end)
+end })
