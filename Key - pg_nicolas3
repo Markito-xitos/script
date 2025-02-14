@@ -315,7 +315,7 @@ end })
 --Rota peca
 
 Tabs.Rota:AddButton({ Title = "Automático", Callback = function() 
-		local A = Vector3.newVector3.new(-1203.8, 63.4939, -522.01)
+		local A = Vector3.new(-1203.8, 63.4939, -522.01)
 		local B = Vector3.new(-1245.9, 78.3190, -506.21)
 		local C = Vector3.new(-1118.4, 28.4659, -509.94)
 		local Fac = Vector3.new(32.7781982421875, 30.117435455322266, 176.89813232421875)
