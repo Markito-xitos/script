@@ -1303,6 +1303,20 @@ end })
 
 
 
+Tabs.Jogador:AddButton({ Title = "Teste", Callback = function() 
+local rs = game.workspace.MapaGeral.Estacionamentox.EstacionamentoModel.Spawns.CarrosSpawnados
+local NomePlayer = "pg_nicolas3"
+local carro = rs["Porsche Cayenne"]
+local Pasta = Instance.new("Folder")
+Pasta.Name = "TikiMenuCarro"
+Pasta.Parent = workspace
+--local carro = game.workspace["Porsche Cayenne"]
+
+carro:Clone()
+carro.Parent = rs
+carro:MoveTo(game.Workspace[NomePlayer].Head.Position + Vector3.new(10, 0, 0))
+end })
+
 
 
 Tabs.Farm:AddButton({ Title = "Farma mais rapido", Callback = function() 
