@@ -2,7 +2,7 @@ local tempo = "16"
 local NomePlayer = "dsadasdasdsa17"
 
 --Carregar Blioteca
-	local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+	local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Markito04957/Model/refs/heads/main/Main"))()
 
 --Criar Janela
 	local Window = Fluent:CreateWindow({
