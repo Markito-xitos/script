@@ -1,3 +1,4 @@
+--TIKI MENU BACKUP
 local tempo = "16"
 local NomePlayer = "dsadasdasdsa17"
 
@@ -1314,10 +1315,6 @@ Tabs.Farm:AddButton({ Title = "Farma mais rapido", Callback = function()
 
 
 	game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
-		v["HoldDuration"] = 0
-	end)
-end })
-ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
 		v["HoldDuration"] = 0
 	end)
 end })
