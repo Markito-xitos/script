@@ -1303,18 +1303,17 @@ end })
 
 
 
-Tabs.Jogador:AddButton({ Title = "Teste", Callback = function() 
-local rs = game.workspace.MapaGeral.Estacionamentox.EstacionamentoModel.Spawns.CarrosSpawnados
-local NomePlayer = "pg_nicolas3"
-local carro = rs["Porsche Cayenne"]
-local Pasta = Instance.new("Folder")
-Pasta.Name = "TikiMenuCarro"
-Pasta.Parent = workspace
---local carro = game.workspace["Porsche Cayenne"]
+Tabs.Jogador:AddButton({ Title = "Farm Gari", Callback = function() 
+for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+    if v:IsA("ProximityPrompt") then
+        v["Enabled"] = true
+    end
+end
 
-carro:Clone()
-carro.Parent = rs
-carro:MoveTo(game.Workspace[NomePlayer].Head.Position + Vector3.new(10, 0, 0))
+
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
+    v["Enabled"] = true
+end)
 end })
 
 
