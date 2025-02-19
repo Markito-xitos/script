@@ -1302,11 +1302,18 @@ end })
 
 
 Tabs.Jogador:AddButton({ Title = "Farm Gari", Callback = function() 
-for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
-    if v:IsA("ProximityPrompt") then
-        v["Enabled"] = true
-    end
-end
+
+	for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+		if v:IsA("ProximityPrompt") then
+			v["Enabled"] = true
+		end
+	end
+
+
+	game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
+		v["Enabled"] = true
+	end)
+end })
 
 Tabs.Farm:AddButton({ Title = "Farma mais rapido", Callback = function() 
 
